@@ -15,8 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        if UserDefaults.standard.string(forKey: "USER_ID") != nil {
+            let destinationViewController = storyboard.instantiateViewController(withIdentifier: "NavView") as! UINavigationController
+            self.window?.rootViewController = destinationViewController
+            self.window?.makeKeyAndVisible()
+        } else {
+            let destinationViewController = storyboard.instantiateViewController(withIdentifier: "RegView") as! FirstLaunchViewController
+            self.window?.rootViewController = destinationViewController
+            self.window?.makeKeyAndVisible()
+        }
+        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
